@@ -59,7 +59,6 @@ define('NONCE_SALT', $_SERVER["NONCE_SALT"]);
  * a unique prefix. Only numbers, letters, and underscores please!
  */
 $table_prefix  = 'ebwp_';
-
 /**
  * For developers: WordPress debugging mode.
  *
@@ -78,7 +77,6 @@ define('WP_SITEURL', 'http://'.$_SERVER['HTTP_HOST'].'/');
 define('WP_HOME', 'http://'.$_SERVER['HTTP_HOST'].'/');
 
 define('DISALLOW_FILE_MODS',true);
-
 
 /* AWS */
 define( 'DBI_AWS_ACCESS_KEY_ID', $_SERVER['AWS_ACCESS_KEY_ID'] );
