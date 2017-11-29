@@ -75,8 +75,8 @@ $table_prefix  = 'ebwp_';
  */
 define('WP_DEBUG', false);
 
-define('WP_SITEURL', 'http://'.$_SERVER['HTTP_HOST'].'/');
-define('WP_HOME', 'https://'.$_SERVER['HTTP_HOST'].'/');
+define('WP_SITEURL', 'https://' . $_SERVER['HTTP_HOST'] . '/');
+define('WP_HOME', 'https://' . $_SERVER['HTTP_HOST'] . '/');
 
 define('DISALLOW_FILE_MODS',true);
 
