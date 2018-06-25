@@ -82,6 +82,7 @@ define('WP_HOME', 'https://' . $_SERVER['HTTP_HOST'] . '/');
 define( 'DBI_AWS_ACCESS_KEY_ID', $_SERVER['AWS_ACCESS_KEY_ID'] );
 define( 'DBI_AWS_SECRET_ACCESS_KEY', $_SERVER['AWS_SECRET_ACCESS_KEY'] );
 
+define('WP_MEMORY_LIMIT', '3000M');
 /* That's all, stop editing! Happy blogging. */
 
 /** Absolute path to the WordPress directory. */
