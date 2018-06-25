@@ -91,11 +91,9 @@ if (!is_page_template('template-blank.php') && !mtheme_is_fullscreen_post() ) {
 	?>
 <?php
 	$header_menu_type = of_get_option('header_menu_type');
-	if ($header_menu_type <> "vertical-menu") {
-		echo '<div id="copyright">';
-		echo do_shortcode( $footer_info );
-		echo '</div>';
-	}
+	echo '<div id="copyright">';
+	echo do_shortcode( $footer_info );
+	echo '</div>';
 ?>
 <?php
 } // end of blank template check

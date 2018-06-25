@@ -3,7 +3,7 @@ Theme Name: Kinetika for WordPress
 Theme URI: http://kinetika.imaginem.co
 Description: Kinetika Studio - Fullscreen Photography Theme for WordPress.
 
-Version: 3.8
+Version: 4.0
 Author: imaginem
 Author URI: http://kinetika.imaginem.co
 License: GNU General Public License v2.0
@@ -11,7 +11,7 @@ License URI: http://themeforest.net/licenses/regular_extended
 Tags: white, black, two-columns, responsive-layout, custom-background, threaded-comments, translation-ready, custom-menu
 Text Domain: mthemelocal
 
-	Kinetika for WordPress v3.8
+	Kinetika for WordPress v4.0
 	http://kinetika.imaginem.co
 
 	Theme designed and developed by imaginem,
@@ -1425,6 +1425,18 @@ Page
 .single-page-container,
 .single-gridblock-image-container {
 }
+
+.gridblock-header-wrap {
+	margin-top: 56px;
+}
+
+.gridblock-header-wrap.grid-block-header-proofing #gridblock-filters {
+	margin-bottom: 0;
+}
+.gridblock-header-wrap.grid-block-header-proofing .gridblock-filter-select-wrap {
+	margin-bottom: 30px;
+}
+
 .container-head {
 	height: 15px;
 	width: 100%;
@@ -14970,7 +14982,6 @@ Proofing
 	font-weight: 400;
 	border-bottom:1px solid #fff;
 	padding-bottom: 10px;
-	margin-top: 20px;
 	display: inline-block;
 }
 .proofing-content {

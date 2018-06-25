@@ -106,10 +106,12 @@ jQuery(document).ready(function($){
 						$('#mtheme-proofing-item-'+image_id+'').removeClass("proofing-item-inprogress").removeClass("proofing-item-unchecked").addClass("proofing-item-selected");
 						$('#mtheme-proofing-item-'+image_id+'').find('.proofing-icon-status').removeClass("feather-icon-check").addClass("feather-icon-cross");
 						$('#mtheme-proofing-item-'+image_id+'').data('proofing_status','selected');	
+						$('#mtheme-proofing-item-' + image_id + '').removeClass("filter-unchecked").addClass('filter-selected');
 					} else {
 						$('#mtheme-proofing-item-'+image_id+'').removeClass("proofing-item-inprogress").addClass("proofing-item-unchecked").removeClass("proofing-item-selected");
 						$('#mtheme-proofing-item-'+image_id+'').find('.proofing-icon-status').addClass("feather-icon-check").removeClass("feather-icon-cross");
-						$('#mtheme-proofing-item-'+image_id+'').data('proofing_status','unchecked');							
+						$('#mtheme-proofing-item-'+image_id+'').data('proofing_status','unchecked');
+						$('#mtheme-proofing-item-' + image_id + '').removeClass("filter-selected").addClass('filter-unchecked');						
 					}
 					var proofing_count_total = $(".proofing-item-wrap > .mtheme-proofing-item").length;
 					var proofing_count_selected = $(".proofing-item-wrap > .proofing-item-selected").length;
@@ -1144,6 +1146,92 @@ jQuery(document).ready(function($) {
 	if ($.fn.isotope) {
 		$filterContainer.imagesLoaded( function() {
 	    $filterContainer.isotope( 'on', 'layoutComplete', function (isoInstance, laidOutItems) {
+			$(".gridblock-element:not(.isotope-hidden) .column-gridblock-lightbox").magnificPopup({
+	 	        type: 'image',
+	 	        tLoading: '',
+		        closeBtnInside: false,
+		        fixedContentPos:true,
+		        mainClass: 'mfp-zoom-in',
+		        removalDelay: 300,
+		        image: {
+		            verticalFit: true,
+		            titleSrc: function(item) {
+
+		                        var caption = item.el.attr('title');
+
+		                        var pinItURL = "http://pinterest.com/pin/create/bookmarklet/";
+		                        pinItURL += '?url=' + window.location.href;
+		                        pinItURL += '&media=' + item.el.attr('href');
+		                        pinItURL += '&description=' + caption;
+		                        var pinshare = '<a class="lightbox-share" href="'+pinItURL+'" target="_blank"><i class="fa fa-pinterest"></i></a>';
+
+		                        var facebookURL = "http://www.facebook.com/sharer.php";
+		                        facebookURL += '?u=' + item.el.attr('href');
+		                        facebookURL += '&t=' + caption;
+		                        var facebookshare = '<a class="lightbox-share" href="'+facebookURL+'" target="_blank"><i class="fa fa-facebook"></i></a>';
+
+		                        var twitterURL = "http://twitter.com/intent/tweet?text=";
+		                        twitterURL += caption;
+		                        twitterURL += '+' + item.el.attr('href');
+		                        var twittershare = '<a class="lightbox-share" href="'+twitterURL+'" target="_blank"><i class="fa fa-twitter"></i></a>';
+
+
+		                        return caption + '<div class="maginific-lightbox-sharing">'+facebookshare+pinshare+twittershare+'</div>';
+		            }
+		        },
+
+			    gallery: {
+			      enabled: true,
+			      preloader: true,
+			      preload:	[1,1],
+			      arrowMarkup: '<span title="%title%" class="mfp-arrow mfp-arrow-%dir%"><i class="fa fa-angle-%dir% mfp-prevent-close"></i></span>',
+			      tCounter: '<span class="mfp-counter-inner">%curr% / %total%</span>'
+			    },
+
+			    callbacks: {
+					open: function() {
+						this.wrap.on('click.pinhandler', '.lightbox-share', function(e) {
+
+						  window.open(e.currentTarget.href, "intent", "scrollbars=yes,resizable=yes,toolbar=no,location=yes,width=550,height=420,left=" + (window.screen ? Math.round(screen.width / 2 - 275) : 50) + ",top=" + 100);
+
+						  return false;
+						});
+
+						if ($.fn.swipe) {
+							$(".mfp-wrap").swipe({
+							    swipeLeft: function() {
+							    	$(".mfp-arrow-left").magnificPopup("next");
+							    },
+							    swipeRight: function() {
+							    	$(".mfp-arrow-right").magnificPopup("prev");
+							    }
+							});
+						}
+
+						//overwrite default prev + next function. Add timeout for css3 crossfade animation
+						$.magnificPopup.instance.next = function() {
+							var self = this;
+							self.wrap.removeClass('mfp-image-loaded');
+							setTimeout(function() { $.magnificPopup.proto.next.call(self); }, 120);
+						}
+						$.magnificPopup.instance.prev = function() {
+							var self = this;
+							self.wrap.removeClass('mfp-image-loaded');
+							setTimeout(function() { $.magnificPopup.proto.prev.call(self); }, 120);
+						}
+					},
+					beforeClose: function() {
+						this.wrap.off('click.pinhandler');
+					},
+					imageLoadComplete: function() 
+					{	
+						var self = this;
+						setTimeout(function() { self.wrap.addClass('mfp-image-loaded'); }, 16);
+					}
+			    }
+
+			});
+
 			$(".gridblock-element:not(.isotope-hidden) a[data-lightbox^='magnific-image']").magnificPopup({
 	 	        type: 'image',
 	 	        tLoading: '',
